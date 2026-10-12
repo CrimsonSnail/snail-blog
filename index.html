@@ -3,29 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حلزون</title>
-    <!-- استيراد خط أميري الكلاسيكي من جوجل -->
+    <title>Snail Blog</title>
+    
+    <!-- Fallback Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
     <style>
-        /* تعريف الخط الذي رفعناه */
+        /* Custom Font Declaration */
         @font-face {
-            font-family: 'SakkalKitab.ttf';
-            src: url('customfont.ttf') format('truetype'); /* (إذا كان بصيغة woff2 استبدل ttf بـ woff2، واجعل اسم الملف مطابقاً لملفك تماماً) */
+            font-family: 'SakkalKitab';
+            src: url('SakkalKitab.ttf') format('truetype');
             font-weight: normal;
             font-style: normal;
+            font-display: swap;
         }
+
         :root {
-            --paper: #f7f1e5;
-            --accent: #a0402e;
-            --post-title: #b85d43;
-            --ink: #4a3b32;
+            --paper: #fcf0dd;
+            --accent: #ba5536;
+            --ink: #4b3b2a;
+            --frame: #6b5236;
             --line: #d9c3a0;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        /* Apply SakkalKitab as the primary font globally */
+        html, body, button, input, textarea, select {
+            font-family: 'SakkalKitab', 'Amiri', serif;
         }
 
         body {
             background-color: var(--paper);
             color: var(--ink);
-            font-family: 'SakkalKitab.ttf', 'Amiri', serif; /* وضعنا خطك أولاً */
             margin: 0;
             padding: 0;
             line-height: 2.1;
@@ -33,116 +45,85 @@
             text-align: right;
             font-size: 1.3rem;
         }
-        }
 
-        /* شريط الترويسة العلوي */
+        /* Header Layout: Right (Title), Center (Logo), Left (Menu) */
         header.top-bar {
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
             align-items: center;
-            padding: 25px 30px;
+            padding: 28px 22px 10px;
         }
 
+        /* Site Title - Right Aligned */
         .site-title {
-            font-size: 2.2rem;
+            justify-self: start;
+            font-size: 2.3rem;
             color: var(--accent);
-            font-weight: 700;
             text-decoration: none;
+            line-height: 1.2;
+            font-weight: bold;
         }
 
+        /* Snail Logo - Center Aligned */
+        .snail-logo {
+            justify-self: center;
+        }
         .snail-logo svg {
-            width: 50px;
+            width: 56px;
             height: auto;
-        }
-
-        .menu-btn {
-            background: var(--accent);
-            border: 3px solid #6b5236;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 2px 3px 5px rgba(75, 59, 42, 0.3);
-        }
-
-        .menu-btn span {
             display: block;
-            width: 4px;
-            height: 4px;
-            background: var(--paper);
-            border-radius: 50%;
-            box-shadow: 0 8px 0 var(--paper), 0 -8px 0 var(--paper);
         }
 
-        /* حاوية التدوينة الرئيسية */
+        /* Menu Button - Left Aligned */
+        .menu-btn {
+            justify-self: end;
+            background: var(--accent);
+            border: 4px solid var(--frame);
+            width: 44px;
+            height: 44px;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            box-shadow: 3px 4px 6px rgba(75, 59, 42, 0.35);
+        }
+
+        .menu-btn svg {
+            width: 14px;
+            height: 26px;
+            fill: var(--paper);
+        }
+
+        /* Main Article Container */
         main.container {
-            max-width: 650px;
-            margin: 20px auto 60px;
-            padding: 0 20px;
+            max-width: 40rem;
+            margin: 0 auto;
+            padding: 40px 6% 80px;
         }
 
-        article.post {
-            margin-bottom: 60px;
-        }
-
-        h1.post-title {
+        article.post h1.post-title {
             text-align: center;
-            font-size: 2rem;
-            color: var(--post-title);
+            font-size: 2.4rem;
+            color: var(--accent);
             font-weight: normal;
-            margin-bottom: 5px;
+            margin: 0 0 5px 0;
+            line-height: 1.5;
         }
 
         .post-date {
             text-align: center;
-            font-size: 0.95rem;
-            color: #7a685e;
-            margin-bottom: 35px;
+            font-size: 1rem;
+            color: #1f1a14;
+            line-height: 1.6;
+            margin: 2px 0 22px;
         }
 
         .post-body {
-            font-size: 1.15rem;
             text-align: justify;
             text-justify: inter-word;
         }
 
         .post-body p {
-            margin-bottom: 25px;
+            margin: 0 0 20px 0;
         }
     </style>
-</head>
-<body>
-
-    <!-- الترويسة العلوية -->
-    <header class="top-bar">
-        <div class="menu-btn" title="القائمة">
-            <span></span>
-        </div>
-        <div class="snail-logo">
-            <!-- أيقونة الحلزون -->
-            <svg viewBox="0 0 100 80" fill="none" stroke="#a0402e" stroke-width="3" stroke-linecap="round">
-                <path d="M10 65 C30 68 64 68 82 65 C92 63 94 54 91 46 M91 46 L95 35 M86 47 L84 36"/>
-                <circle cx="95" cy="33" r="2" fill="#a0402e"/>
-                <circle cx="84" cy="34" r="2" fill="#a0402e"/>
-                <path d="M52 42 A3 3 0 0 1 46 42 A6 6 0 0 1 58 42 A9 9 0 0 1 40 42 A12 12 0 0 1 64 42 A15 15 0 0 1 34 42"/>
-            </svg>
-        </div>
-        <a href="#" class="site-title">حلزون</a>
-    </header>
-
-    <!-- محتوى المقال / التدوينة -->
-    <main class="container">
-        <article class="post">
-            <h1 class="post-title">عنوان التدوينة</h1>
-            <div class="post-date">الإثنين · 15 أكتوبر 2026</div>
-            <div class="post-body">
-                <p>أما ذهبتم في يوم من أيام الربيع الحالمة إلى بعض ضواحي المدينة، حيث البرية المهتزة الناضرة والغاب المونق الجميل؟ أما رأيتم ذلك البلبل الأنيق المنتقل بين الغصون المورقة، يترنّم بأغاريده الرقيقة الشجية؟ أما أبصرتم تلك القُبّرة الرشيقة المتخطرة بين مخاوف الأشجار وحول مسارب الحقول تتغنى بتلك الأناشيد العذبة الطاهرة؟</p>
-                <p>ثم أما أحسستم إذ ذاك وأنتم بين أحضان الطبيعة بذلك الشعور القوي الغامض الثّميل يستحوذ على مشاعركم ويستولي على نفوسكم فيجعلها أدنى إلى الخلود منها إلى هذا العالم الفاني؟</p>
-            </div>
-        </article>
-    </main>
-
-</body>
-</html>
+</
