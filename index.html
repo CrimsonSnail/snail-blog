@@ -3,148 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مدونة الحلزون | Snail Blog</title>
-    <!-- أداة المصادقة الخاصة بـ Netlify (ضرورية لتسجيل الدخول إلى /admin) -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <title>حلزون</title>
+
     <style>
+        /* Custom Font Declaration */
+        @font-face {
+            font-family: 'SakkalKitab';
+            src: url('SakkalKitab.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --paper: #fcf0dd;
+            --accent: #ba5536;
+            --ink: #4b3b2a;
+            --frame: #6b5236;
+            --line: #d9c3a0;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        /* Apply SakkalKitab globally */
+        html, body, button, input, textarea, select {
+            font-family: 'SakkalKitab', serif;
+        }
+
         body {
-            background-color: #f4f1ea; /* خلفية ذات طابع عتيق وكريمي */
-            color: #2c221e;
-            font-family: "Traditional Arabic", "Amiri", serif, sans-serif;
-            max-width: 700px;
-            margin: 50px auto;
-            padding: 20px;
-            line-height: 1.8;
-        }
-        header {
-            text-align: center;
-            border-bottom: 2px dashed #b5a48b;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-        }
-        h1 {
-            font-size: 2.4em;
+            background-color: var(--paper);
+            color: var(--ink);
             margin: 0;
-            color: #4a3b32;
+            padding: 0;
+            line-height: 1.9;
+            direction: rtl;
+            text-align: right;
+            font-size: 1.15rem; /* تصغير حجم الخط العام قليلاً ليطابق المطلوب */
         }
-        p.subtitle {
-            color: #7c6f64;
-            font-size: 1.1em;
-            margin-top: 5px;
+
+        /* Header Layout: Right (Title), Center (Logo), Left (Menu) */
+        header.top-bar {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            padding: 24px 20px 10px;
         }
-        h2.section-title {
-            font-size: 1.5em;
-            color: #4a3b32;
-            margin-bottom: 15px;
-            border-right: 4px solid #b5a48b;
-            padding-right: 10px;
-        }
-        /* صندوق التدوينات القابل للتمرير (Scroll) */
-        .posts-container {
-            max-height: 450px;
-            overflow-y: auto;
-            padding: 15px;
-            border: 1px solid #dcd2c3;
-            background: #faf8f5;
-            border-radius: 8px;
-            box-shadow: inset 0 0 8px rgba(0,0,0,0.03);
-        }
-        /* تخصيص شكل شريط التمرير (Scrollbar) ليناسب الطابع العتيق */
-        .posts-container::-webkit-scrollbar {
-            width: 8px;
-        }
-        .posts-container::-webkit-scrollbar-track {
-            background: #eae3d2;
-            border-radius: 4px;
-        }
-        .posts-container::-webkit-scrollbar-thumb {
-            background: #b5a48b;
-            border-radius: 4px;
-        }
-        .posts-container::-webkit-scrollbar-thumb:hover {
-            background: #8c7d70;
-        }
-        .post-card {
-            background: #ffffff;
-            padding: 15px 20px;
-            margin-bottom: 15px;
-            border-radius: 6px;
-            border: 1px solid #e6dfd5;
-            transition: all 0.2s ease-in-out;
-        }
-        .post-card:last-child {
-            margin-bottom: 0;
-        }
-        .post-card:hover {
-            transform: translateX(-4px);
-            border-color: #b5a48b;
-            box-shadow: 2px 2px 8px rgba(0,0,0,0.05);
-        }
-        .post-title {
-            font-size: 1.3em;
-            color: #3b2f2f;
+
+        /* Site Title - Right Aligned */
+        .site-title {
+            justify-self: start;
+            font-size: 2.1rem;
+            color: var(--accent);
             text-decoration: none;
+            line-height: 1.2;
             font-weight: bold;
+        }
+
+        /* Snail Logo - Center Aligned */
+        .snail-logo {
+            justify-self: center;
+        }
+        .snail-logo svg {
+            width: 50px;
+            height: auto;
             display: block;
-            margin-bottom: 5px;
         }
-        .post-title:hover {
-            color: #8c6d53;
+
+        /* Menu Button - Left Aligned */
+        .menu-btn {
+            justify-self: end;
+            background: var(--accent);
+            border: 3px solid var(--frame);
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            box-shadow: 2px 3px 5px rgba(75, 59, 42, 0.3);
         }
-        .post-date {
-            font-size: 0.85em;
-            color: #9e9185;
-            display: block;
+
+        .menu-btn svg {
+            width: 12px;
+            height: 22px;
+            fill: var(--paper);
         }
-        footer {
+
+        /* Main Article Container */
+        main.container {
+            max-width: 38rem;
+            margin: 0 auto;
+            padding: 30px 5% 70px;
+        }
+
+        article.post h1.post-title {
             text-align: center;
-            margin-top: 40px;
-            font-size: 0.9em;
-            color: #8c7d70;
-            border-top: 1px solid #e6dfd5;
-            padding-top: 15px;
+            font-size: 2.1rem;
+            color: var(--accent);
+            font-weight: normal;
+            margin: 0 0 5px 0;
+            line-height: 1.4;
+        }
+
+        .post-date {
+            text-align: center;
+            font-size: 0.95rem;
+            color: #5c4a38;
+            line-height: 1.5;
+            margin: 2px 0 20px;
+        }
+
+        .post-body {
+            text-align: justify;
+            text-justify: inter-word;
+            font-size: 1.15rem;
+        }
+
+        .post-body p {
+            margin: 0 0 18px 0;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>مدونة الحلزون 🐌</h1>
-        <p class="subtitle">مساحة هادئة للتدوين بخطوات بطيئة وثابتة</p>
+    <!-- Top Header -->
+    <header class="top-bar">
+        <a href="#" class="site-title">حلزون</a>
+
+        <div class="snail-logo">
+            <svg viewBox="0 0 100 80" fill="none" stroke="#ba5536" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 65 C30 68 64 68 82 65 C92 63 94 54 91 46"/>
+                <path d="M91 46 L95 35"/>
+                <path d="M86 47 L84 36"/>
+                <circle cx="95" cy="33" r="2" fill="#ba5536" stroke="none"/>
+                <circle cx="84" cy="34" r="2" fill="#ba5536" stroke="none"/>
+                <path d="M52 42 A3 3 0 0 1 46 42 A6 6 0 0 1 58 42 A9 9 0 0 1 40 42 A12 12 0 0 1 64 42 A15 15 0 0 1 34 42"/>
+            </svg>
+        </div>
+
+        <button type="button" class="menu-btn" aria-label="Menu">
+            <svg viewBox="0 0 14 26">
+                <circle cx="7" cy="3" r="2.4"/>
+                <circle cx="7" cy="13" r="2.4"/>
+                <circle cx="7" cy="23" r="2.4"/>
+            </svg>
+        </button>
     </header>
 
-    <main>
-        <h2 class="section-title">التدوينات الأخيرة</h2>
-        
-        <!-- قسم القائمة القابلة للتمرير (Scroll) -->
-        <div class="posts-container">
-            
-            <!-- تدوينة 1 (يمكنك تغيير الرابط والعنوان وتاريخ النشر) -->
-            <div class="post-card">
-                <a href="./_posts/2026-10-12-أنها-تعمل-يا-رفاق.html" class="post-title">أنها تعمل يا رفاق</a>
-                <span class="post-date">١٢ أكتوبر ٢٠٢٦</span>
+    <!-- Post Content -->
+    <main class="container">
+        <article class="post">
+            <h1 class="post-title">عنوان التدوينة</h1>
+            <div class="post-date">الإثنين · 15 أكتوبر 2026</div>
+            <div class="post-body">
+                <p>أما ذهبتم في يوم من أيام الربيع الحالمة إلى بعض ضواحي المدينة، حيث البرية المهتزة الناضرة والغاب المونق الجميل؟ أما رأيتم ذلك البلبل الأنيق المنتقل بين الغصون المورقة، يترنّم بأغاريده الرقيقة الشجية؟ أما أبصرتم تلك القُبّرة الرشيقة المتخطرة بين مخاوف الأشجار وحول مسارب الحقول تتغنى بتلك الأناشيد العذبة الطاهرة؟</p>
+                <p>ثم أما أحسستم إذ ذاك وأنتم بين أحضان الطبيعة بذلك الشعور القوي الغامض الثّميل يستحوذ على مشاعركم ويستولي على نفوسكم فيجعلها أدنى إلى الخلود منها إلى هذا العالم الفاني؟</p>
             </div>
-
-            <!-- تدوينة 2 تجريبية -->
-            <div class="post-card">
-                <a href="#" class="post-title">رحلة البحث عن البساطة في الويب</a>
-                <span class="post-date">١٠ أكتوبر ٢٠٢٦</span>
-            </div>
-
-            <!-- تدوينة 3 تجريبية -->
-            <div class="post-card">
-                <a href="#" class="post-title">عن الفن والخطوات البطيئة</a>
-                <span class="post-date">٠٥ أكتوبر ٢٠٢٦</span>
-            </div>
-
-            <!-- يمكنك إضافة المزيد من بطاقات التدوينات هنا -->
-
-        </div>
+        </article>
     </main>
-
-    <footer>
-        <p>جميع الحقوق محفوظة © مدونة الحلزون 🐌</p>
-    </footer>
 
 </body>
 </html>
