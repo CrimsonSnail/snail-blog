@@ -8,5 +8,11 @@
 <body>
   <!-- Decap CMS Script -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    // تحديد مسار ملف الإعدادات صراحةً لمنع خطأ 404
+    CMS.init({
+      config: './config.yml'
+    });
+  </script>
 </body>
 </html>
