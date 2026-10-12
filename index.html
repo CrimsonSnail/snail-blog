@@ -7,6 +7,13 @@
     <!-- استيراد خط أميري الكلاسيكي من جوجل -->
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
+        /* تعريف الخط الذي رفعناه */
+        @font-face {
+            font-family: 'MyCustomFont';
+            src: url('customfont.ttf') format('truetype'); /* (إذا كان بصيغة woff2 استبدل ttf بـ woff2، واجعل اسم الملف مطابقاً لملفك تماماً) */
+            font-weight: normal;
+            font-style: normal;
+        }
         :root {
             --paper: #f7f1e5;
             --accent: #a0402e;
@@ -18,12 +25,14 @@
         body {
             background-color: var(--paper);
             color: var(--ink);
-            font-family: 'Amiri', serif;
+            font-family: 'MyCustomFont', 'Amiri', serif; /* وضعنا خطك أولاً */
             margin: 0;
             padding: 0;
-            line-height: 2;
+            line-height: 2.1;
             direction: rtl;
             text-align: right;
+            font-size: 1.3rem;
+        }
         }
 
         /* شريط الترويسة العلوي */
