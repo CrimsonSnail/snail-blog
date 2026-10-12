@@ -1,7 +1,6 @@
 backend:
-  name: github
-  repo: CrimsonSnail/blog # مثال: CrimsonSnail/blog
-  branch: main # أو master حسب اسم الفرع لديك
+  name: git-gateway
+  branch: main
 
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
